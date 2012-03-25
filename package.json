@@ -1,0 +1,18 @@
+{
+  "author": "Joe White (http://blog.excastle.com/)",
+  "name": "Tyler",
+  "description": "Builds tile-based console RPGs that run in a browser",
+  "version": "0.0.0",
+  "repository": {
+    "url": ""
+  },
+  "dependencies": {
+    "coffee-script": ">=1.2.0 <2",
+    "eco": ">=1.1.0-rc-3 <2"
+  },
+  "devDependencies": {},
+  "optionalDependencies": {},
+  "engines": {
+    "node": ">=0.6.12"
+  }
+}

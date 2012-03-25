@@ -1,0 +1,22 @@
+{
+    "folders":
+    [
+        {
+            "path": ".",
+            "folder_exclude_patterns":
+            [
+                "node_modules",
+                "www"
+            ],
+            "file_exclude_patterns":
+            [
+                "*.sublime-workspace"
+            ]
+        }
+    ],
+    "settings":
+    {
+        "tab_size": 4,
+        "translate_tabs_to_spaces": true
+    }
+}
