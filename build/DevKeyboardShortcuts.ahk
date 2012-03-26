@@ -46,7 +46,7 @@ IfWinActive, gitk
 return
 
 NumpadMult::
-RunWait, %comspec% /c cd ..\sample && jake || pause && exit /b 1
+RunWait, %comspec% /c cd .. && jake || pause && exit /b 1
 if ErrorLevel = 0
 {
   WinActivate, Google Chrome
