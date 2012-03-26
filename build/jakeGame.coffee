@@ -1,15 +1,15 @@
 fs = require 'fs'
 path = require 'path'
+Paths = require './paths'
 
-root = (pathFragments...) -> path.join __dirname, '..', pathFragments...
-runtime = (pathFragments...) -> root 'runtime', pathFragments...
-runtime.views = (pathFragments...) -> runtime 'views', pathFragments...
+root = path.resolve __dirname, '..'
+paths = new Paths root, 'runtime', 'runtime/views'
 
 directory 'www'
-file 'www/index.html', ['www', runtime.views 'index.chtml'], ->
+file 'www/index.html', ['www', paths.runtime.views 'index.chtml'], ->
     console.log 'www/index.html'
     eco = require 'eco'
-    templatePath = runtime.views 'index.chtml'
+    templatePath = paths.runtime.views 'index.chtml'
     template = fs.readFileSync templatePath, 'utf8'
     gameData = JSON.parse fs.readFileSync 'game.json', 'utf8'
     output = eco.render template, gameData
