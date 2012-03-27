@@ -8,11 +8,20 @@
   },
   "dependencies": {
     "coffee-script": ">=1.2.0 <2",
-    "eco": ">=1.1.0-rc-3 <2"
+    "eco": ">=1.1.0-rc-3 <2",
+    "glob": ">=3.1.9 <4",
+    "iced-coffee-script": ">=1.2.0t <2"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "expect.js": ">=0.1.2 <1",
+    "jake": ">=0.2.31 <1",
+    "mocha": ">=1.0.0 <2"
+  },
   "optionalDependencies": {},
   "engines": {
     "node": ">=0.6.12"
+  },
+  "scripts": {
+    "test": "jake"
   }
 }

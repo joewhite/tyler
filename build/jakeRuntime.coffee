@@ -1,4 +1,5 @@
 child_process = require 'child_process'
+path = require 'path'
 
 sh = (commandLine, options, callback) ->
     if typeof options == 'function'
@@ -21,4 +22,19 @@ task 'sample', ->
     sh 'jake', cwd: 'sample', complete
 , async: true
 
-task 'default', ['sample']
+task 'test', ->
+    require 'iced-coffee-script'
+    global.expect = require 'expect.js'
+    glob = require 'glob'
+    Mocha = require 'mocha'
+    mocha = new Mocha reporter: 'spec'
+    glob '**/test/**/*.iced', (err, files) ->
+        throw err if err?
+        for file in files
+            mocha.addFile file
+        mocha.run (failures) ->
+            throw new Error "Tests failed" if failures != 0
+            complete()
+, async: true
+
+task 'default', ['test', 'sample']
