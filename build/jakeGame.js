@@ -1,2 +1,2 @@
-require('coffee-script');
-require('./jakeGame.coffee');
+require('iced-coffee-script');
+require('./jakeGame.iced');
