@@ -30,6 +30,7 @@ if (typeof define !== 'function') {
 directory 'runtime/js'
 
 runtimeDirectory = (runtimeDirectoryName) ->
+    # glob doesn't work with backslashes. Make sure to use forward slashes.
     sourcePaths = glob.sync "runtime/#{runtimeDirectoryName}/**/*.iced"
     targetPaths = []
     headerRegex = ///
@@ -58,8 +59,21 @@ runtimeDirectory = (runtimeDirectoryName) ->
 
 runtimeDirectory 'battle'
 
+# glob doesn't work with backslashes. Make sure to use forward slashes.
+thirdPartySourcePaths = glob.sync 'runtime/thirdparty/*.js'
+thirdPartyTargetPaths = []
+for sourcePath in thirdPartySourcePaths
+    targetPath = path.join 'runtime', 'js', path.basename sourcePath
+    thirdPartyTargetPaths.push targetPath
+    do (sourcePath, targetPath) ->
+        file targetPath, [sourcePath, 'runtime/js'], ->
+            jake.cpR sourcePath, targetPath
+
+desc 'Copies third-party libraries into the runtime'
+task 'thirdparty', thirdPartyTargetPaths
+
 desc 'Builds all runtime libraries'
-task 'runtime', ['battle']
+task 'runtime', ['battle', 'thirdparty']
 
 task 'sample', ['runtime'], ->
     sh 'jake', cwd: 'sample', complete
@@ -70,6 +84,7 @@ task 'test', ['runtime'], ->
     global.expect = require 'expect.js'
     Mocha = require 'mocha'
     mocha = new Mocha reporter: 'spec'
+    # glob doesn't work with backslashes. Make sure to use forward slashes.
     glob '**/test/**/*.iced', (err, files) ->
         throw err if err?
         for file in files
