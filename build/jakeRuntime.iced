@@ -82,6 +82,12 @@ task 'sample', ['runtime'], ->
 task 'test', ['runtime'], ->
     require 'iced-coffee-script'
     global.expect = require 'expect.js'
+    global.window = global.navigator = {}
+    global.document =
+        createComment: ->
+            text: ''
+        createElement: ->
+            getElementsByTagName: -> []
     Mocha = require 'mocha'
     mocha = new Mocha reporter: 'spec'
     # glob doesn't work with backslashes. Make sure to use forward slashes.
