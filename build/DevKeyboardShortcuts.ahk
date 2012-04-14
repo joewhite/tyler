@@ -6,9 +6,10 @@
 ;               already-running instance and invokes "Rescan".
 ;   Numpad +    Opens Gitk (All Branch History) if it's not already running,
 ;               or switches to the running instance and invokes "Update".
-;   Numpad *    Runs jake to build the sample project, then moves focus to an
-;               existing instance of Google Chrome, switches to tab #4, and
-;               invokes "Refresh".
+;   Numpad *    Runs jake to build the sample project, then:
+;               - If an instance of Google Chrome is open to the sample app,
+;                 then activate that instance of Chrome and refresh the page;
+;               - Otherwise, move focus to Sublime Text 2.
 ;   Numpad /    Moves focus to the Sublime Text 2 editor currently editing the
 ;               "Tyler" project.
 
@@ -49,10 +50,14 @@ NumpadMult::
 RunWait, %comspec% /c cd .. && jake || pause && exit /b 1
 if ErrorLevel = 0
 {
-  WinActivate, Google Chrome
-  IfWinActive, Google Chrome
-    Send, ^4{F5}
+  WinActivate, Stupid Quest - Google Chrome
+  IfWinActive, Stupid Quest - Google Chrome
+    Send, {F5}
+  else
+    Gosub NumpadDiv
 }
+else
+  Gosub NumpadDiv
 return
 
 NumpadDiv::
