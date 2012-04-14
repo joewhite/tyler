@@ -6,7 +6,7 @@ root = path.resolve __dirname, '..'
 paths = new Paths root, 'runtime', 'runtime/view'
 
 directory 'www'
-file 'www/index.html', ['www', paths.runtime.view 'index.chtml'], ->
+file 'www/index.html', ['www', 'game.json', paths.runtime.view 'index.chtml'], ->
     console.log 'www/index.html'
     eco = require 'eco'
     templatePath = paths.runtime.view 'index.chtml'
