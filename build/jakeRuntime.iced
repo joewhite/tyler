@@ -27,6 +27,13 @@ if (typeof define !== 'function') {
 
 '''
 
+desc 'Removes all built files'
+task 'clean', [], ->
+    if !jake.rmRf?
+        fail 'Requires Jake >= 0.2.33 (do you need to npm update -g jake?)'
+    jake.rmRf 'runtime/js'
+    jake.rmRf 'sample/www'
+
 directory 'runtime/js'
 
 runtimeDirectory = (runtimeDirectoryName) ->
