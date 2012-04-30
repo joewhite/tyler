@@ -36,18 +36,23 @@ task 'clean', [], ->
 
 directory 'runtime/js'
 
+packageJson = ->
+    if !packageJson.data?
+        packageJson.data = JSON.parse fs.readFileSync 'package.json', 'utf8'
+    packageJson.data
+
 license = ->
     if !license.data?
         content = fs.readFileSync 'LICENSE', 'utf8'
         firstLine = content.split(/[\r\n]/)[0]
-        header = "// #{firstLine}. See LICENSE.js.\n"
+        header = "// Tyler v#{packageJson().version}. #{firstLine}. See LICENSE.js.\n"
         license.data =
             'content': content,
             'header': header
     license.data
 
-file 'runtime/js/LICENSE.js', ['runtime/js', 'jakefile', 'build/jakeRuntime.iced', 'LICENSE'], ->
-    content = "/* @license\n#{license().content} */"
+file 'runtime/js/LICENSE.js', ['runtime/js', 'jakefile', 'build/jakeRuntime.iced', 'LICENSE', 'package.json'], ->
+    content = "/* Tyler v#{packageJson().version}\n@license MIT\n#{license().content} */"
     fs.writeFile 'runtime/js/LICENSE.js', content, (err) ->
         throw err if err?
         complete()
