@@ -1,4 +1,4 @@
-define ['./knockout-2.1.0beta', './defend'], (ko, Defend) ->
+define ['./knockout-2.1.0beta', './defend', './LICENSE'], (ko, Defend) ->
     class Troop
         constructor: ->
             @turnTimer = ko.observable 0

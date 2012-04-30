@@ -36,6 +36,23 @@ task 'clean', [], ->
 
 directory 'runtime/js'
 
+license = ->
+    if !license.data?
+        content = fs.readFileSync 'LICENSE', 'utf8'
+        firstLine = content.split(/[\r\n]/)[0]
+        header = "// #{firstLine}. See LICENSE.js.\n"
+        license.data =
+            'content': content,
+            'header': header
+    license.data
+
+file 'runtime/js/LICENSE.js', ['runtime/js', 'jakefile', 'build/jakeRuntime.iced', 'LICENSE'], ->
+    content = "/* @license\n#{license().content} */"
+    fs.writeFile 'runtime/js/LICENSE.js', content, (err) ->
+        throw err if err?
+        complete()
+, async: true
+
 runtimeDirectory = (runtimeDirectoryName) ->
     # glob doesn't work with backslashes. Make sure to use forward slashes.
     sourcePaths = glob.sync "runtime/#{runtimeDirectoryName}/**/*.iced"
@@ -52,11 +69,11 @@ runtimeDirectory = (runtimeDirectoryName) ->
     for sourcePath in sourcePaths
         targetPath = path.join 'runtime', 'js', path.basename(sourcePath).replace '.iced', '.js'
         do (sourcePath, targetPath) ->
-            file targetPath, [sourcePath, 'jakefile', 'build/jakeRuntime.iced', 'runtime/js'], ->
+            file targetPath, [sourcePath, 'jakefile', 'build/jakeRuntime.iced', 'LICENSE', 'runtime/js/LICENSE.js'], ->
                 iced = require 'iced-coffee-script'
                 source = fs.readFileSync sourcePath, 'utf8'
                 compiled = iced.compile source
-                target = compiled.replace headerRegex, "$1#{AMDEFINE_HEADER}"
+                target = license().header + compiled.replace headerRegex, "$1#{AMDEFINE_HEADER}"
                 fs.writeFileSync targetPath, target, 'utf8'
                 complete()
             , async: true
