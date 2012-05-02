@@ -1,4 +1,4 @@
-js/
 node_modules/
-www/
+runtime/js/
+sample/www/
 *.sublime-workspace
