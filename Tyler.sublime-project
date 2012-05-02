@@ -6,11 +6,13 @@
             "folder_exclude_patterns":
             [
                 "node_modules",
-                "www"
+                "runtime/js",
+                "sample/www"
             ],
             "file_exclude_patterns":
             [
-                "*.sublime-workspace"
+                "*.sublime-workspace",
+                "*.tgz"
             ]
         }
     ],
