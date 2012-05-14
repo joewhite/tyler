@@ -1,0 +1,7 @@
+runtime/battle/
+sample/
+test/
+*.sublime-*
+*.tgz
+.npmignore
+jakefile
