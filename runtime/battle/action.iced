@@ -1,4 +1,4 @@
-define ['./knockout-2.1.0beta', './LICENSE'], (ko) ->
+define ['./knockout-2.1.0', './LICENSE'], (ko) ->
     class Action
         constructor: ->
             @timer = ko.observable 0
