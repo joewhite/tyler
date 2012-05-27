@@ -34,7 +34,7 @@ To play around with it, follow these steps:
 
 You can now open `sample/www/index.html` in a Web browser. Exciting!
 
-Or you can hack on the code. Tests are in `test/*.iced`, the source code for the battle-system runtime library is in `runtime/battle`, the [Eco][] template for the HTML page is in `runtime/view`, and the build logic behind the Jakefile is in `build/`. A more complete introduction will be forthcoming once there's more to see.
+Or you can hack on the code. Tests are in `test/*.iced`, the source code for the battle-system runtime library is in `runtime/battle`, the [Eco][] template for the HTML page is in `runtime/view`, and the build logic behind the Jakefile is in `build/` (for building the Tyler runtime library) and `compiler/` (for compiling the sample game). A more complete introduction will be forthcoming once there's more to see.
 
   [Eco]: https://github.com/sstephenson/eco
   [IcedCoffeeScript]: http://maxtaco.github.com/coffee-script/
