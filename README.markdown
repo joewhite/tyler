@@ -40,5 +40,5 @@ Or you can hack on the code. Tests are in `test/*.iced`, the source code for the
   [IcedCoffeeScript]: http://maxtaco.github.com/coffee-script/
   [Jake]: https://github.com/mde/jake
   [JSON]: http://www.json.org/
-  [Mocha]: http://visionmedia.github.com/mocha/
+  [Mocha]: https://mochajs.org/
   [Node.js]: http://nodejs.org/
